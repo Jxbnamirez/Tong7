@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมท่องอวกาศ: ทายปัญหาดาราศาสตร์</title>
+    <!-- ลิงก์ไปยังไฟล์ CSS ข้างนอก -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="quiz-container">
+        <!-- หน้าคำถาม -->
+        <div id="quiz-box">
+            <h1>✦ ท่องมิติตอบคำถามอวกาศ ✦</h1>
+            <div class="progress">คำถามที่ <span id="current-number">1</span> จาก <span id="total-number">5</span></div>
+            <div class="question" id="question-text">โหลดคำถาม...</div>
+            <div class="options-container" id="options-box">
+                <!-- ปุ่มตัวเลือกจะถูกเพิ่มด้วย JavaScript -->
+            </div>
+            <button id="next-button" class="next-btn hide">ข้อถัดไป ➔</button>
+        </div>
+
+        <!-- หน้าสรุปคะแนน -->
+        <div id="result-box" class="result-container hide">
+            <h1>สิ้นสุดการสำรวจอวกาศ!</h1>
+            <p class="score-text">คุณทำคะแนนได้ <span id="score">0</span> คะแนน</p>
+            <button class="restart-btn" onclick="startQuiz()">เริ่มเล่นใหม่</button>
+        </div>
+    </div>
+
+    <!-- ลิงก์ไปยังไฟล์ JavaScript ข้างนอก -->
+    <script src="script.js"></script>
+</body>
+</html>
