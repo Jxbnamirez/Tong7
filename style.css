@@ -1,143 +1,135 @@
-// คลังคำถามดาราศาสตร์และอวกาศ (อัปเดตเป็น 10 ข้อ)
-const quizData = [
-    {
-        question: "1. ดาวเคราะห์ดวงใดในระบบสุริยะที่มีขนาดใหญ่ที่สุด?",
-        options: ["ดาวอังคาร", "ดาวเสาร์", "ดาวพฤหัสบดี", "ดาวยูเรนัส"],
-        correct: 2
-    },
-    {
-        question: "2. ดาวเคราะห์ดวงใดที่ได้ชื่อว่าเป็น 'ฝาแฝดของโลก'?",
-        options: ["ดาวพุธ", "ดาวศุกร์", "ดาวอังคาร", "ดาวเนปจูน"],
-        correct: 1
-    },
-    {
-        question: "3. แสงจากดวงอาทิตย์ใช้เวลาเดินทางมาถึงโลกประมาณกี่นาที?",
-        options: ["ประมาณ 3 นาที", "ประมาณ 8 นาที", "ประมาณ 15 นาที", "เดินทางมาถึงทันที"],
-        correct: 1
-    },
-    {
-        question: "4. ดาวเคราะห์ดวงใดในระบบสุริยะที่มีดวงจันทร์บริวารมากที่สุด?",
-        options: ["ดาวเสาร์", "ดาวพฤหัสบดี", "โลก", "ดาวเนปจูน"],
-        correct: 0
-    },
-    {
-        question: "5. กาแล็กซีที่ระบบสุริยะของเราอาศัยอยู่มีชื่อว่าอะไร?",
-        options: ["กาแล็กซีแอนโดรเมดา", "กาแล็กซีทางช้างเผือก", "กาแล็กซีแมกเจลแลน", "กาแล็กซีไตรแองกูลัม"],
-        correct: 1
-    },
-    {
-        question: "6. ดาวเคราะห์ดวงใดที่มีฉายาว่า 'ดาวเคราะห์แดง' เนื่องจากพื้นผิวเต็มไปด้วยออกไซด์ของเหล็ก (สนิมเหล็ก)?",
-        options: ["ดาวพุธ", "ดาวอังคาร", "ดาวเสาร์", "ดาวเนปจูน"],
-        correct: 1
-    },
-    {
-        question: "7. ดาวเคราะห์ชั้นนอกดวงใดที่มีวงแหวนขนาดใหญ่และมองเห็นได้ชัดเจนที่สุดจากโลก?",
-        options: ["ดาวพฤหัสบดี", "ดาวเสาร์", "ดาวยูเรนัส", "ดาวเนปจูน"],
-        correct: 1
-    },
-    {
-        question: "8. สิ่งใดที่อยู่ใจกลางของกาแล็กซีทางช้างเผือกและมีแรงโน้มถ่วงมหาศาลจนแม้กระทั่งแสงก็ไม่สามารถหนีออกมาได้?",
-        options: ["หลุมดำมวลยิ่งยวด", "ดาวนิวตรอน", "เนบิวลา", "ดาวแคระขาว"],
-        correct: 0
-    },
-    {
-        question: "9. ดาวดวงใดคือ 'ดาวเหนือ' (Polaris) ซึ่งเป็นดาวที่มนุษย์ใช้ในการหาทิศเหนือมาตั้งแต่อดีต?",
-        options: ["ดาวซิริอุส (ดาวโจร)", "ดาวเวกา", "ดาวโพลาริส", "ดาวหางฮัลเลย์"],
-        correct: 2
-    },
-    {
-        question: "10. ยานอวกาศลำแรกที่พามนุษย์ไปลงจอดบนดวงจันทร์ในโครงการ Apollo 11 มีชื่อว่าอะไร?",
-        options: ["ยานวอยเอเจอร์ 1", "ยานสปุตนิก 1", "ยานอพอลโล 11", "ยานคิวริออซิตี"],
-        correct: 2
-    }
-];
-
-let currentQuestionIndex = 0;
-let score = 0;
-
-const quizBox = document.getElementById('quiz-box');
-const resultBox = document.getElementById('result-box');
-const questionElement = document.getElementById('question-text');
-const optionsBox = document.getElementById('options-box');
-const nextButton = document.getElementById('next-button');
-const currentNumIdx = document.getElementById('current-number');
-const totalNumIdx = document.getElementById('total-number');
-const scoreElement = document.getElementById('score');
-
-// ฟังก์ชันเริ่มเกมใหม่
-function startQuiz() {
-    currentQuestionIndex = 0;
-    score = 0;
-    resultBox.classList.add('hide');
-    quizBox.classList.remove('hide');
-    totalNumIdx.textContent = quizData.length;
-    showQuestion();
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-// ฟังก์ชันดึงคำถามมาแสดง
-function showQuestion() {
-    resetState();
-    let currentQuestion = quizData[currentQuestionIndex];
-    currentNumIdx.textContent = currentQuestionIndex + 1;
-    questionElement.textContent = currentQuestion.question;
-
-    // สร้างปุ่มตัวเลือก
-    currentQuestion.options.forEach((option, index) => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.classList.add('option-btn');
-        button.addEventListener('click', () => selectOption(index, button));
-        optionsBox.appendChild(button);
-    });
+body {
+    background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-// ล้างปุ่มของข้อเก่าและซ่อนปุ่มถัดไป
-function resetState() {
-    nextButton.classList.add('hide');
-    while (optionsBox.firstChild) {
-        optionsBox.removeChild(optionsBox.firstChild);
-    }
+.quiz-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-// ฟังก์ชันเมื่อผู้เล่นกดเลือกคำตอบ
-function selectOption(selectedIndex, clickedButton) {
-    const currentQuestion = quizData[currentQuestionIndex];
-    const correctIndex = currentQuestion.correct;
-    const allButtons = optionsBox.querySelectorAll('.option-btn');
-
-    // ตรวจว่าตอบถูกหรือผิด
-    if (selectedIndex === correctIndex) {
-        clickedButton.classList.add('correct');
-        score++;
-    } else {
-        clickedButton.classList.add('wrong');
-        // ไฮไลท์ข้อที่ถูกให้ผู้เล่นดูด้วย
-        allButtons[correctIndex].classList.add('correct');
-    }
-
-    // ล็อกไม่ให้กดปุ่มอื่นซ้ำได้อีกในข้อนี้
-    allButtons.forEach(button => button.disabled = true);
-
-    // แสดงปุ่ม "ข้อถัดไป"
-    nextButton.classList.remove('hide');
+h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4facfe;
+    text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
 }
 
-// อีเวนต์ปุ่มข้อถัดไป
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizData.length) {
-        showQuestion();
-    } else {
-        showResult();
-    }
-});
-
-// ฟังก์ชันแสดงหน้าสรุปคะแนน
-function showResult() {
-    quizBox.classList.add('hide');
-    resultBox.classList.remove('hide');
-    scoreElement.textContent = `${score} / ${quizData.length}`;
+.progress {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 10px;
+    text-align: right;
 }
 
-// เรียกใช้งานครั้งแรกเมื่อโหลดหน้าเว็บ
-startQuiz();
+.question {
+    font-size: 18px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* คลาสสำหรับแสดงเฉลยเมื่อตอบ */
+.option-btn.correct {
+    background-color: #2ecc71 !important;
+    border-color: #2ecc71;
+}
+
+.option-btn.wrong {
+    background-color: #e74c3c !important;
+    border-color: #e74c3c;
+}
+
+.option-btn:disabled {
+    pointer-events: none;
+}
+
+.next-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: opacity 0.2s;
+}
+
+.next-btn:hover {
+    opacity: 0.9;
+}
+
+.hide {
+    display: none;
+}
+
+.result-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.score-text {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.restart-btn {
+    background: #fff;
+    color: #090a0f;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.restart-btn:hover {
+    background: #e0e0e0;
+}
