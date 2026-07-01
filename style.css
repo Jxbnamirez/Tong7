@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.quiz-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4facfe;
+    text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+}
+
+.progress {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* คลาสสำหรับแสดงเฉลยเมื่อตอบ */
+.option-btn.correct {
+    background-color: #2ecc71 !important;
+    border-color: #2ecc71;
+}
+
+.option-btn.wrong {
+    background-color: #e74c3c !important;
+    border-color: #e74c3c;
+}
+
+.option-btn:disabled {
+    pointer-events: none;
+}
+
+.next-btn {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: opacity 0.2s;
+}
+
+.next-btn:hover {
+    opacity: 0.9;
+}
+
+.hide {
+    display: none;
+}
+
+.result-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.score-text {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.restart-btn {
+    background: #fff;
+    color: #090a0f;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.restart-btn:hover {
+    background: #e0e0e0;
+}
